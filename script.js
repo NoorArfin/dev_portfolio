@@ -53,6 +53,54 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Certifications array (static data)
+    const certifications = [
+        {
+            title: "Python Certification",
+            description: "Completed 'Python Basics to Advanced' course from GeeksforGeeks with hands-on projects and practical experience.",
+            type: "pdf",
+            file_url: "certifications/gfg_python_certificate.pdf"
+        },
+        {
+            title: "SQL Certification",
+            description: "Completed 'Advanced SQL Bootcamp' on Udemy with real-world projects and hands-on training.",
+            type: "pdf",
+            file_url: "certifications/udemy_sql_bootcamp.pdf"
+        },
+        {
+            title: "Power BI Certification",
+            description: "Completed a comprehensive Power BI training focused on data visualization, dashboards, and report generation.",
+            type: "pdf",
+            file_url: "certifications/power_BI_certificate.pdf"
+        },
+    ];
+
+    const container = document.getElementById('certification-list');
+    certifications.forEach(cert => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4 mb-4';
+
+        let embed;
+
+        if (cert.type === 'image') {
+            embed = `<img src="${cert.file_url}" class="cert-media mb-2" alt="${cert.title}">`;
+        } else if (cert.type === 'pdf') {
+            embed = `<iframe src="${cert.file_url}" class="cert-media mb-2" frameborder="0"></iframe>`;
+        }
+
+        col.innerHTML = `
+            <div class="card text-center">
+                <div class="card-body">
+                    ${embed}
+                    <h5 class="card-title mt-2">${cert.title}</h5>
+                    <p class="card-text">${cert.description}</p>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(col);
+    });
     
     // Navbar background change on scroll
     window.addEventListener('scroll', function() {
